@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className='flex items-center justify-center min-h-screen py-2 bg-gray-100 space-x-10'>
       <Link className={buttonVariants({  size: "default", className: "max-md:hidden" })}
-        href="/admin" target="_blank"
+        href="/admin/dashboard" target="_blank"
       >
         Admin <ArrowRight className="ml-2 h-5 w-5" />
       </Link>
