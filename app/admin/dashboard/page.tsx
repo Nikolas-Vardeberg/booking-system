@@ -49,9 +49,6 @@ const page = async() => {
           </div>
         </div>
       
-        <div className="self-center">
-          <pre>{JSON.stringify(session, null, 2)}</pre>
-        </div>
       </section>
       
     )
