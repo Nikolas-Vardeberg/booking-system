@@ -15,7 +15,7 @@ const page = async() => {
 
 
     //FINDMANY PRISMA (FINNE ALLE SERVICER)
-    const getAllServices = await prisma.menuItem.findMany({})
+    const getAllServices = await prisma.service.findMany({})
 
 
 
