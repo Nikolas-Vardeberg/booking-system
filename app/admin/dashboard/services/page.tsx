@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db"
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { format } from "date-fns"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -63,6 +63,16 @@ const page = async() => {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
+
+            <div className="mt-8 flex flex-col items-start justify-between gap-4  pb-5 sm:flex-row sm:gap-0 border-b">
+                    <h1 className="mb-3 font-bold text-3xl text-gray-900">My Services</h1>
+
+                    <Link className={buttonVariants({ variant: "outline",  size: "default", className: "max-md:hidden" })}
+                        href="/admin/dashboard/services/create"
+                    >
+                        Lag ny service <Plus className="ml-2 h-5 w-5" />
+                    </Link>
+                </div>
 
             {getAllServices && getAllServices?.length !== 0 ? (
                     <ul className="mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-2 lg:grid-cols-3">
