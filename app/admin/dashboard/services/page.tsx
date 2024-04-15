@@ -9,8 +9,6 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
 
-
-
 const page = async() => {
 
 
@@ -18,29 +16,18 @@ const page = async() => {
     const getAllServices = await prisma.service.findMany({})
 
 
-
-    //FINDMANY UPDATE
+   // const deleteUser = await prisma.service.deleteMany({
+     //   where: {
+       //   id: 'bert@prisma.io',
+        //},
+      //})
     
+      //const handleDelete = async () => {
+
+      //}
 
     //FINDMANY DELETE
-
-    //FINDMANY CREATE
-
-  //  if(!dbUser) {
-    //    await db.user.create({
-      //      data: {
-        //        id: user.id,
-          //      email: user.email
-           // }
-        //})
-     //}
-
-
-
-     // få bilde i sirkelen 
-     //const objectUrl = URL.createObjectURL(input.file)
-     //return () => URL.revokeObjectURL(objectUrl)
-
+   // const deleteService = await prisma.service.delete({})
 
     return(
         <MaxWidthWrapper>
@@ -74,6 +61,7 @@ const page = async() => {
                     </Link>
                 </div>
 
+
             {getAllServices && getAllServices?.length !== 0 ? (
                     <ul className="mt-8 grid grid-cols-1 gap-6 divide-y divide-zinc-200 md:grid-cols-2 lg:grid-cols-3">
                         {getAllServices.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((service) => (
@@ -102,7 +90,7 @@ const page = async() => {
                                         {service.name}
                                     </div>
 
-                                    <Button size="sm" className="w-full" variant="destructive">
+                                    <Button size="sm" className="w-full" variant="destructive" key={service.id}>
                                         <Trash className="h-4 w-4"/>
                                     </Button>
                                 </div>
