@@ -29,31 +29,31 @@ export const ServiceModal = () => {
     const [preview, setPreview] = useState<string>('')
     const [error, setError] = useState<string>('')
 
-    const createPresignedUrl = async({ fileType }) => {
-        const id = nanoid()
-        const ex = input.fileType.split('/')[1]
-        const key = `${id}.${ex}`
+    //const createPresignedUrl = async({ fileType }) => {
+       // const id = nanoid()
+       // const ex = input.fileType.split('/')[1]
+       // const key = `${id}.${ex}`
 
-        const { url, fields } = (await new Promise((resolve, reject) => {
-        s3.createPresignedPost(
-            {
-            Bucket: 'youtube-booking-software',
-            Fields: { key },
-            Expires: 60,
-            Conditions: [
-                ['content-length-range', 0, MAX_FILE_SIZE],
-                ['starts-with', '$Content-Type', 'image/'],
-            ],
-            },
-            (err, signed) => {
-            if (err) return reject(err)
-            resolve(signed)
-            }
-        )
-        })) as any as { url: string; fields: any }
+        //const { url, fields } = (await new Promise((resolve, reject) => {
+        //s3.createPresignedPost(
+          //  {
+        //    Bucket: 'youtube-booking-software',
+      //      Fields: { key },
+    //        Expires: 60,
+  //          Conditions: [
+              //  ['content-length-range', 0, MAX_FILE_SIZE],
+            //    ['starts-with', '$Content-Type', 'image/'],
+          //  ],
+        //    },
+      //      (err, signed) => {
+    //        if (err) return reject(err)
+  //          resolve(signed)
+          //  }
+        //)
+       // })) as any as { url: string; fields: any }
 
-        return { url, fields, key }
-    }
+     //   return { url, fields, key }
+   // }
 
     useEffect(() => {
         //CREATE PREVIEW
