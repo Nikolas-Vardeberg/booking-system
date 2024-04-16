@@ -1,29 +1,25 @@
-"use client"
+
+'use client';
 
 import { Button } from "@/components/ui/button"
 import { Trash } from "lucide-react"
 import { prisma } from "@/lib/db"
+import { handleDelete } from "@/lib/getStaticProps";
 
 
+const DeleteButton = ( itemId: any ) => {
 
-const DeleteButton = ({ itemId }) => {
 
-    const handleDelete = async () => {
-        console.log(typeof itemId, itemId);
-
-        // Delete the file from the database using Prisma
-        await prisma.service.delete({
-            where: {
-                id: itemId,
-            }
-        });
+    const handleClick = () => {
+        handleDelete(itemId);
+        window.location.reload();
     };
 
     return(
         <>
-            <Button size="sm" className="w-full" variant="destructive" onClick={handleDelete}>
-                <Trash className="h-4 w-4"/>
-            </Button>
+        <button onClick={handleClick}>
+            slett
+        </button>
         </>
     )
 }
