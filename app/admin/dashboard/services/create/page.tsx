@@ -1,7 +1,7 @@
 "use client"
 
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
-import { StoreModal } from "@/components/modals/store-modal"
+import { ServiceModal } from "@/components/modals/service-modal"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -67,7 +67,7 @@ const page = async() => {
         </Breadcrumb>
 
         <>
-          <StoreModal />
+          <ServiceModal />
         </>
 
         </MaxWidthWrapper>

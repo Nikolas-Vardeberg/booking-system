@@ -1,10 +1,11 @@
+import MaxWidthWrapper from "@/components/MaxWidthWrapper"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import { SlashIcon } from "lucide-react"
 
 
 const page = () => {
     return(
-        <div>
+        <MaxWidthWrapper>
           <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
@@ -28,7 +29,7 @@ const page = () => {
             <div>
                 se hvilke timer som er bestilt og hvilke servicer å kontakt innformasjon
             </div>
-        </div>
+        </MaxWidthWrapper>
     )
 }
 

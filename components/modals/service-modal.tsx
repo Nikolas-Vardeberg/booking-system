@@ -24,35 +24,33 @@ interface Input {
     file: undefined,
   }
 
-export const StoreModal = () => {
+export const ServiceModal = () => {
     const [input, setInput] = useState<Input>(initialInput)
     const [preview, setPreview] = useState<string>('')
     const [error, setError] = useState<string>('')
 
     const createPresignedUrl = async({ fileType }) => {
         const id = nanoid()
-        const ex = input.fileType.split("/")[1]
+        const ex = input.fileType.split('/')[1]
         const key = `${id}.${ex}`
 
-        const {url, fields} = await new Promise((resolve, reject) => {
-            s3.createPresignedPost({
-                Bucket: "service-creation",
-                Fields: { key },
-                Expires: 60,
-                Conditions: [
-                    ["content-length-range", 0, MAX_FILE_SIZE],
-                    ["starts-with", "$Content-Type", "image/"],
-                ],
+        const { url, fields } = (await new Promise((resolve, reject) => {
+        s3.createPresignedPost(
+            {
+            Bucket: 'youtube-booking-software',
+            Fields: { key },
+            Expires: 60,
+            Conditions: [
+                ['content-length-range', 0, MAX_FILE_SIZE],
+                ['starts-with', '$Content-Type', 'image/'],
+            ],
             },
-            
-
-            (err, data) => {
-                if (err) return reject(err)
-                resolve(data)
+            (err, signed) => {
+            if (err) return reject(err)
+            resolve(signed)
             }
-
-            )
-        }) as any as { url: string; fields: any }
+        )
+        })) as any as { url: string; fields: any }
 
         return { url, fields, key }
     }
@@ -117,10 +115,10 @@ export const StoreModal = () => {
             return service;
     }
 
-     const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setInput((prev) => ({ ...prev, [name]: value }))
-  }
+    const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+        setInput((prev) => ({ ...prev, [name]: value }))
+    }
 
     return(
         <MaxWidthWrapper className="mt-20">
@@ -143,7 +141,7 @@ export const StoreModal = () => {
 
             <Label
                 htmlFor='file'
-                className='relative h-12 cursor-pointer rounded-sm font-medium focus-within:outline-none'>
+                className='relative h-[400px] cursor-pointer rounded-sm font-medium focus-within:outline-none border border-dashed'>
                 <span className='sr-only'>File input</span>
                 <div className='flex h-full items-center justify-center'>
                 {preview ? (

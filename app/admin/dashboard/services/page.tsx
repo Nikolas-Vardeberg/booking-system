@@ -8,6 +8,7 @@ import { format } from "date-fns"
 import { Button, buttonVariants } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
+import DeleteButton from "@/components/DeleteButton"
 
 const page = async() => {
 
@@ -87,12 +88,14 @@ const page = async() => {
 
                                     <div className="flex items-center gap-2">
                                         <MessageSquare className="w-4 h-4" />
-                                        {service.name}
+                                        {service.id}
                                     </div>
 
-                                    <Button size="sm" className="w-full" variant="destructive" key={service.id}>
-                                        <Trash className="h-4 w-4"/>
-                                    </Button>
+
+                                    <>
+                                        <DeleteButton itemId={service.id} />
+                                    </>
+                                    
                                 </div>
 
                             </li>
