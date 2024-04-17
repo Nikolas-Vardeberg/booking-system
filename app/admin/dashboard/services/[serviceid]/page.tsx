@@ -31,6 +31,11 @@ const page = async({ params }: PageProps) => {
         }
     })
 
+    const onSubmit = async () => {
+
+    };
+
+
     if(!file) return(
         <div className="mt-16 flex flex-col items-center gap-2">
             <Ghost className="h-8 w-8 text-gray-900" />

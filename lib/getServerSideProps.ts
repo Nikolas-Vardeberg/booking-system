@@ -10,7 +10,19 @@ export const handleDelete = async ({itemId}: any) => {
     });
 };
 
-export async function getStaticProps() {
+
+export const handleUpdate = async ({itemId}: any) => {
+    await prisma.service.update({
+        where: {
+            id: itemId,
+        },
+        data: {
+
+        }
+    })
+}
+
+export async function getServerSideProps() {
     const data = await prisma.service.findMany();
 
     return {
