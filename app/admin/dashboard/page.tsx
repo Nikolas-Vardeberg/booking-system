@@ -46,6 +46,16 @@ const page = async() => {
             >
               Bestillinger
             </Link>
+            <Link
+              className={buttonVariants({
+                variant: "outline",
+                size: "default",
+                className: "max-md:hidden"
+              })}
+              href="/admin/dashboard/feedback"
+            >
+              Tilbakemeling
+            </Link>
           </div>
         </div>
       

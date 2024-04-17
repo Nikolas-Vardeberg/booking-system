@@ -19,3 +19,18 @@ model Service {
   imageKey String
   active Boolean @default(true)
 }
+
+model Feedback {
+  id String @id @default(cuid())
+  createdAt DateTime @default(now())
+  feedback FeedbackType
+  comment String
+}
+
+enum FeedbackType {
+  VERYBAD
+  BAD
+  NEUTRAL
+  GOOD
+  VERYGOOD
+}
