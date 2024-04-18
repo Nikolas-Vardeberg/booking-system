@@ -62,7 +62,7 @@ const page = () => {
              <MaxWidthWrapper className="mt-12 transition-all">
             {feedbackSubmitted ? (
                 <div className="text-center text-2xl font-bold mb-4">
-                    You have already sent feedback. Thank you!
+                   Thank you for the feedback!
                 </div>
             ) : (
                 <div className="space-y-6">
