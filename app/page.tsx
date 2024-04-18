@@ -16,6 +16,11 @@ export default function Home() {
       >
         Booking <ArrowRight className="ml-2 h-5 w-5" />
       </Link>
+      <Link className={buttonVariants({ variant: "outline",  size: "default", className: "max-md:hidden" })}
+        href="/feedback" target="_blank"
+      >
+        feedback <ArrowRight className="ml-2 h-5 w-5" />
+      </Link>
     </div>
   )
 }

@@ -23,7 +23,7 @@ model Service {
 model Feedback {
   id String @id @default(cuid())
   createdAt DateTime @default(now())
-  feedback FeedbackType
+  feedback FeedbackType @default(NEUTRAL)
   comment String
 }
 

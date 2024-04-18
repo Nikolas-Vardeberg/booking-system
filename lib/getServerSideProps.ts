@@ -25,6 +25,7 @@ export const handleUpdate = async ({itemId}: any) => {
 export async function getServerSideProps() {
     const data = await prisma.service.findMany();
 
+
     return {
         props: {
             data,
