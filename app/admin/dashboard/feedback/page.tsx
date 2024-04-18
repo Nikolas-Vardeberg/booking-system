@@ -36,7 +36,7 @@ const page = async() => {
             {feedback.map((item, index) => (
               <div key={index} className="p-4 border border-gray-200 rounded-lg shadow-md">
                 <h3 className="font-semibold text-xl">{item.feedback}</h3>
-                <p className="text-gray-600">{item.comment}</p>
+                <p className="text-gray-600"> {item.comment.length ? item.comment : "No comment"}</p>
                 <p className="text-gray-500">{format(new Date(item.createdAt), 'MMM d, HH:mm')}</p>
 
               </div>
