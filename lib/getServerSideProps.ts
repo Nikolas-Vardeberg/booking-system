@@ -1,7 +1,8 @@
 "use server"
 
 import { prisma } from "@/lib/db"
-import { FeedbackType } from "@prisma/client";
+import { FeedbackType, Service } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 export const handleDelete = async ({itemId}: any) => {
     await prisma.service.delete({
@@ -9,6 +10,31 @@ export const handleDelete = async ({itemId}: any) => {
             id: itemId,
         },
     });
+};
+
+export const createService = async ({ name, price, imageKey }) => {
+    try {
+       const service = await prisma.service.create({
+         data: {
+           name,
+           price,
+           imageKey,
+           active: true, // Assuming you want to set the service as active by default
+         },
+       });
+       console.log("created")
+
+       redirect("/admin/dashboard/services")
+   
+    } catch (error) {
+       console.error('Error creating service:', error);
+       throw error;
+    }
+};
+
+export const fetchServices = async (): Promise<Service[]> => {
+    const services = await prisma.service.findMany({});
+    return services;
 };
 
 export async function createFeedback(feedbackType: FeedbackType, comment: string) {

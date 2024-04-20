@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 
 import { prisma } from "@/lib/db"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FeedbackType } from "@prisma/client";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -102,8 +102,10 @@ const page = () => {
                         <Textarea className="resize-none h-40" placeholder="Enter Your Message Here" value={comment} onChange={handleCommentChange}/>
                     </div>
                 </div>
+
             
                 <Button type="submit" onClick={handleSubmit} disabled={selectedFeedback === null}>Send inn tilbakemeling</Button>
+
             </div>
             )}
         </MaxWidthWrapper>

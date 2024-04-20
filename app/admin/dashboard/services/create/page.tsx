@@ -1,77 +1,48 @@
 "use client"
 
-import MaxWidthWrapper from "@/components/MaxWidthWrapper"
-import { ServiceModal } from "@/components/modals/service-modal"
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { MAX_FILE_SIZE } from "@/constants/config"
-import { Ghost, MessageSquare, Plus, SlashIcon, Trash } from "lucide-react"
-import dynamic from "next/dynamic"
-import Image from "next/image"
-import { ChangeEvent, useState } from "react"
-import type { MultiValue } from 'react-select/dist/declarations/src'
+import { Button } from "@/components/ui/button";
+import { createService } from "@/lib/getServerSideProps";
+import { useState } from "react";
 
-const DynamicSelect = dynamic(() => import('react-select'), { ssr: false })
+const page = () => {
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
+    const [imageKey, setImageKey] = useState(""); // New state variable for imageKey
 
-interface Input {
-    name: string
-    price: number
-    file: undefined | File
-  }
-  
-  const initialInput = {
-    name: '',
-    price: 0,
-    file: undefined,
-  }
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
+        try {
+            const floatPrice = parseFloat(price);
+            if (isNaN(floatPrice)) {
+                throw new Error('Price must be a valid number');
+            }
 
-const page = async() => {
-    const [input, setInput] = useState<Input>(initialInput)
-    const [preview, setPreview] = useState<string>('')
-    const [error, setError] = useState<string>('')
-
-    const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-
+            const service = await createService({ name, price: floatPrice, imageKey });
+            return service;
+        } catch (error) {
+            console.error('Error creating service:', error);
+        }
     }
 
-    const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
-
-    }
-
-    const addMenuItem = async () => {
-      
-    }
-
-    return(
-        <MaxWidthWrapper>
-        <Breadcrumb>
-            <BreadcrumbList>
-                <BreadcrumbItem>
-                <BreadcrumbLink href="/admin/dashboard">Admin</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                <SlashIcon />
-                </BreadcrumbSeparator>
-                <BreadcrumbItem>
-                <BreadcrumbLink href="/admin/dashboard/services">Services</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                <SlashIcon />
-                </BreadcrumbSeparator>
-                <BreadcrumbItem>
-                <BreadcrumbPage>Create Service</BreadcrumbPage>
-                </BreadcrumbItem>
-            </BreadcrumbList>
-        </Breadcrumb>
-
-        <>
-          <ServiceModal />
-        </>
-
-        </MaxWidthWrapper>
+    return (
+        <div>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          </label>
+          <label>
+            Price:
+            <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+          </label>
+          <label>
+            Image Key:
+            <input type="text" value={imageKey} onChange={(e) => setImageKey(e.target.value)} />
+          </label>
+          <Button type="submit">Submit</Button>
+        </form>
+      </div>
     )
 }
 
-export default page
+export default page;
