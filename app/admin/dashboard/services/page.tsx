@@ -1,7 +1,7 @@
 "use client"
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
-import { Ghost, Loader2, MessageSquare, Plus, SlashIcon, Trash } from "lucide-react"
+import { Ghost, Loader2, MessageSquare, Plus, SlashIcon, Trash, Wallet2 } from "lucide-react"
 
 import { prisma } from "@/lib/db"
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
@@ -96,8 +96,8 @@ const page = () => {
                                         </div>
 
                                         <div className="flex items-center gap-2">
-                                            <MessageSquare className="w-4 h-4" />
-                                            {service.name}
+                                            <Wallet2 className="w-4 h-4" />
+                                            {service.price}
                                         </div>
 
                                         <DeleteButton itemId={service.id} />

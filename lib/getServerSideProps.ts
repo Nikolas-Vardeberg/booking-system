@@ -4,12 +4,19 @@ import { prisma } from "@/lib/db"
 import { FeedbackType, Service } from "@prisma/client";
 import { redirect } from "next/navigation";
 
-export const handleDelete = async ({itemId}: any) => {
-    await prisma.service.delete({
-        where: {
-            id: itemId,
-        },
-    });
+export const handleDelete = async (itemId) => {
+    try {
+        await prisma.service.delete({
+            where: {
+                id: itemId,
+            },
+        });
+        console.log("Service deleted successfully");
+        return true; // Indicate success
+    } catch (error) {
+        console.error('Error deleting service:', error);
+        throw error; // Rethrow the error to be handled by the caller
+    }
 };
 
 export const createService = async ({ name, price, imageKey }) => {
