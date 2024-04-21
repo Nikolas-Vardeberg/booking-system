@@ -19,6 +19,10 @@ export const handleDelete = async (itemId) => {
     }
 };
 
+export const createImageData = async (imageData) => {
+    console.log("image data on server", imageData)
+}
+
 export const createService = async ({ name, price, imageKey }) => {
     try {
        const service = await prisma.service.create({
