@@ -38,13 +38,22 @@ const page = async() => {
             </Breadcrumb>
 
             <div>
-              <Card className="mt-10">
+            {feedback && feedback.length === 0 ? (null) :
+            <div className="mt-10">
+              <Card>
                 <CardHeader>
                   Total review, Average review, bra tilbakemeling 
                 </CardHeader>
               </Card>
 
               <FeedbackFilter />
+
+              </div>
+              }
+              <div>
+
+             
+              </div>
 
         {feedback && feedback.length !== 0 ? (
           <div className="my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
