@@ -11,14 +11,33 @@ datasource db {
 }
 
 model Service {
-  id String @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name String
-  price Float
-  imageKey String
-  active Boolean @default(true)
+ id String @id @default(cuid())
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+ name String
+ price Float
+ interval Int // Interval in minutes
+ imageKey String
+ bookings Booking[]
 }
+
+model Booking {
+ id String @id @default(cuid())
+ startTime DateTime
+ endTime DateTime
+ serviceId String
+ service Service @relation(fields: [serviceId], references: [id])
+ userId String
+ user User @relation(fields: [userId], references: [id])
+}
+
+model User {
+ id String @id @default(cuid())
+ name String
+ email String 
+ bookings Booking[]
+}
+
 
 model Feedback {
   id String @id @default(cuid())
@@ -33,17 +52,4 @@ enum FeedbackType {
   NEUTRAL
   GOOD
   VERYGOOD
-}
-
-model Day {
-  id        String @id @default(cuid())
-  name      String // monday, tuesday, ...
-  dayOfWeek Int // @see getDay() documentation, 0 for Sunday, 1 for Monday, ...
-  openTime  String
-  closeTime String
-}
-
-model ClosedDay {
-  id   String   @id @default(cuid())
-  date DateTime @unique
 }
