@@ -19,6 +19,7 @@ model Service {
  interval Int // Interval in minutes
  imageKey String
  bookings Booking[]
+ availabilities ServiceAvailability[] // Corrected relation
 }
 
 model Booking {
@@ -36,6 +37,16 @@ model User {
  name String
  email String 
  bookings Booking[]
+}
+
+model ServiceAvailability {
+ id String @id @default(cuid())
+ serviceId String
+ service Service @relation(fields: [serviceId], references: [id]) // Corrected relation
+ dayOfWeek Int // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+ isClosed Boolean
+ openingTime DateTime? // Nullable to allow for closed days
+ closingTime DateTime? // Nullable to allow for closed days
 }
 
 
