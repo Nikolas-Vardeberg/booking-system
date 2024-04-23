@@ -86,7 +86,7 @@ const page = async({ params }: PageProps) => {
                     <CardContent className='flex flex-row justify-between p-6'>
                         <h1>{getServiceInfo?.name}</h1>
                         <h1>createdAt: {format(new Date(getServiceInfo?.createdAt), "MMM d yyyy")}</h1>
-                        <h1>updatedAt: {format(new Date(getServiceInfo?.updatedAt), "MMM d yyyy")}</h1>
+                        <h1>interval pr min {getServiceInfo?.interval}</h1>
                         <h1>{getServiceInfo?.imageKey}</h1>
                         <h1>price: {getServiceInfo?.price}</h1>
                     </CardContent>

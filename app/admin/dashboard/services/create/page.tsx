@@ -5,18 +5,17 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { MAX_FILE_SIZE } from "@/constants/config";
 import { createImageData, createService } from "@/lib/getServerSideProps";
 import { s3 } from "@/lib/s3";
 import { SlashIcon } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
-import { nanoid } from 'nanoid'
 
 
 const page = () => {
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
+    const [interval, setInterval] = useState("");
 
 
     const [imageKey, setImageKey] = useState(""); // New state variable for imageKey
@@ -31,7 +30,12 @@ const page = () => {
                 throw new Error('Price must be a valid number');
             }
 
-            const service = await createService({ name, price: floatPrice, imageKey });
+            const floatInterval = parseFloat(interval);
+            if (isNaN(floatInterval)) {
+                throw new Error("interval must be a valid number")
+            }
+
+            const service = await createService({ name, price: floatPrice, imageKey, interval: floatInterval });
             return service;
         } catch (error) {
             console.error('Error creating service:', error);
@@ -65,6 +69,9 @@ const page = () => {
           
           <Label>Price</Label>
           <Input type="number" placeholder="price" value={price} onChange={(e) => setPrice(e.target.value)} />
+
+          <Label>Interval *in minutes</Label>
+          <Input type="number" placeholder="interval" value={interval} onChange={(e) => setInterval(e.target.value)} />
          
           <Button type="submit">Submit</Button>
         </form>

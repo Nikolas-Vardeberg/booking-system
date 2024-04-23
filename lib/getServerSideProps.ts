@@ -23,14 +23,14 @@ export const createImageData = async (imageData) => {
     console.log("image data on server", imageData)
 }
 
-export const createService = async ({ name, price, imageKey }) => {
+export const createService = async ({ name, price, imageKey, interval }) => {
     try {
        const service = await prisma.service.create({
          data: {
            name,
            price,
            imageKey,
-           active: true, // Assuming you want to set the service as active by default
+           interval
          },
        });
        console.log("created")
